@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: sha-messagebroker-appA
+  profiles:
+    active: activemq
+  cloud:
+    config:
+      uri: http://sha-backend-alb-533525507.us-east-2.elb.amazonaws.com/config-service/

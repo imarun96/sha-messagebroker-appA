@@ -1,0 +1,71 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.7.BUILD-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+	id 'jacoco'
+}
+
+group = 'com.lg'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+jacoco {
+	toolVersion = "0.8.5"
+}
+
+ext {
+	set('springCloudVersion', "Hoxton.BUILD-SNAPSHOT")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-activemq'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws-messaging'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	testCompile group: 'org.awaitility', name: 'awaitility', version: '2.0.0'
+	compile group: 'com.amazonaws', name: 'amazon-sqs-java-messaging-lib', version: '1.0.8'
+	compile group: 'org.hisp', name: 'dhis2-java-client', version: '1.3.0'
+	compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0'
+	compile group: 'org.json', name: 'json', version: '20201115'
+	compile group: 'org.apache.qpid', name: 'qpid-amqp-1-0-client-jms', version: '0.32'
+	compile group: 'org.apache.commons', name: 'commons-lang3'
+	compile group: 'org.apache.qpid', name: 'proton-j'
+	compile group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.5.0'
+	compile group: 'com.microsoft.azure', name: 'azure-servicebus-jms-spring-boot-starter', version: '2.3.5'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	reports {
+	html.enabled=true
+	csv.enabled=true
+	xml.enabled=true
+	}
+}
