@@ -10,18 +10,18 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 
 import com.microsoft.azure.servicebus.primitives.ConnectionStringBuilder;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Profile("azure")
+@Slf4j
 public class AzureProducerSession<S extends javax.jms.Session> {
 
     protected S session = null;
     private Boolean isAlive = Boolean.TRUE;
-    private static final Logger log = LoggerFactory.getLogger(AzureProducerSession.class);
     private Connection connection;
 
     /*

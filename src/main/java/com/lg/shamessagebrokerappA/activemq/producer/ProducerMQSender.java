@@ -4,16 +4,16 @@ import javax.jms.JMSException;
 import javax.jms.Queue;
 import javax.jms.QueueSender;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Profile("activemq")
 @Service
+@Slf4j
 public class ProducerMQSender extends ProducerMQSession<javax.jms.QueueSession> {
 
-    private static final Logger log = LoggerFactory.getLogger(ProducerMQSender.class);
     private QueueSender sender;
 
     /*

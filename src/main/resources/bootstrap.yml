@@ -5,4 +5,4 @@ spring:
     active: activemq
   cloud:
     config:
-      uri: http://sha-backend-alb-533525507.us-east-2.elb.amazonaws.com/config-service/
+      uri: http://localhost:8888

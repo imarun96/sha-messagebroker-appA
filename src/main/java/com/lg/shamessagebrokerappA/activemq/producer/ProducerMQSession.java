@@ -6,16 +6,16 @@ import javax.jms.JMSException;
 import javax.jms.Session;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Profile("activemq")
+@Slf4j
 public class ProducerMQSession<S extends javax.jms.Session> {
 
     protected S session = null;
     private Boolean isAlive = Boolean.TRUE;
-    private static final Logger log = LoggerFactory.getLogger(ProducerMQSession.class);
 
     /*
      * Creates a session in Active MQ.

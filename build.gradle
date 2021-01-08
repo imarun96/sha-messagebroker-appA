@@ -43,6 +43,7 @@ dependencies {
 	compile group: 'org.apache.qpid', name: 'qpid-amqp-1-0-client-jms', version: '0.32'
 	compile group: 'org.apache.commons', name: 'commons-lang3'
 	compile group: 'org.apache.qpid', name: 'proton-j'
+	implementation 'org.ektorp:org.ektorp:1.5.0'
 	compile group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.5.0'
 	compile group: 'com.microsoft.azure', name: 'azure-servicebus-jms-spring-boot-starter', version: '2.3.5'
 	compileOnly 'org.projectlombok:lombok'

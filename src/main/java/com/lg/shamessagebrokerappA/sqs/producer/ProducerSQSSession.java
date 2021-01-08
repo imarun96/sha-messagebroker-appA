@@ -3,8 +3,6 @@ package com.lg.shamessagebrokerappA.sqs.producer;
 import javax.jms.JMSException;
 import javax.jms.Session;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 
 import com.amazon.sqs.javamessaging.ProviderConfiguration;
@@ -15,12 +13,14 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Profile("sqs")
+@Slf4j
 public class ProducerSQSSession<S extends javax.jms.Session> {
 
     protected S session = null;
     private Boolean isAlive = Boolean.TRUE;
-    private static final Logger log = LoggerFactory.getLogger(ProducerSQSSession.class);
     /*
      * Creates a session in ActiveMQ.
      * 

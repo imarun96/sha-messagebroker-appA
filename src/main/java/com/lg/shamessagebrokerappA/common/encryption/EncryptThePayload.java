@@ -8,14 +8,13 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public class EncryptThePayload {
 
     private static final String KEY = "aesEncryptionKey";
     private static final String INITVECTOR = "encryptionIntVec";
-    private static final Logger log = LoggerFactory.getLogger(EncryptThePayload.class);
 
     /*
      * Encrypt the message before it is sent to the queue.

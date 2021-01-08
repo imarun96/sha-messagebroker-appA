@@ -4,15 +4,15 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 
 import org.apache.qpid.amqp_1_0.jms.impl.QueueImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Profile("azure")
 @Service
+@Slf4j
 public class AzureProducerSender extends AzureProducerSession<javax.jms.QueueSession> {
-    private static final Logger log = LoggerFactory.getLogger(AzureProducerSender.class);
     private MessageProducer producer;
     /*
      * Publish the message to the queue.

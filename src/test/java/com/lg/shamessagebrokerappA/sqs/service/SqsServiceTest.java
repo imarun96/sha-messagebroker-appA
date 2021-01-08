@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.lg.shamessagebrokerappA.ShaMessagebrokerAppAApplication;
 import com.lg.shamessagebrokerappA.common.dto.DHIS2ObjectDto;
-import com.lg.shamessagebrokerappA.common.dto.OpenMRSObjectDto;
+import com.lg.shamessagebrokerappA.sqs.service.impl.SqsPublisherServiceImpl;
 
 @ExtendWith({ MockitoExtension.class, SpringExtension.class })
 @ActiveProfiles({ "sqs" })
@@ -38,19 +38,5 @@ class SqsServiceTest {
         dhis2.setTemperature("25");
         dhis2.setWeight("85");
         assertEquals("Message published to the queue.", sqsPublisherServiceImpl.publish(dhis2));
-    }
-
-    @Test
-    void publishOpenMRSObj() {
-        OpenMRSObjectDto openMRS = new OpenMRSObjectDto();
-        openMRS.setAddress1("Uganda");
-        openMRS.setBirthdate("29-04-1996");
-        openMRS.setCityVillage("Uganda");
-        openMRS.setCountry("Uganda");
-        openMRS.setFamilyName("Living-Goods");
-        openMRS.setGender("M");
-        openMRS.setGivenName("lg-sample-user");
-        openMRS.setPostalCode("343434");
-        assertEquals("Message published to the queue.", sqsPublisherServiceImpl.publish(openMRS));
     }
 }

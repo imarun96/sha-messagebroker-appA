@@ -2,15 +2,15 @@ package com.lg.shamessagebrokerappA.sqs.producer;
 
 import java.util.TimerTask;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Profile("sqs")
+@Slf4j
 public class ProducerSQSRefresh extends TimerTask {
 
     private ProducerSQSService mqService;
-    private static final Logger log = LoggerFactory.getLogger(ProducerSQSRefresh.class);
 
     public ProducerSQSRefresh(ProducerSQSService mqService) {
         this.mqService = mqService;

@@ -2,15 +2,15 @@ package com.lg.shamessagebrokerappA.azure.producer;
 
 import java.util.TimerTask;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Profile("azure")
+@Slf4j
 public class AzureProducerRefresh extends TimerTask {
 
     private AzureProducerService mqService;
-    private static final Logger log = LoggerFactory.getLogger(AzureProducerRefresh.class);
 
     public AzureProducerRefresh(AzureProducerService mqService) {
         this.mqService = mqService;

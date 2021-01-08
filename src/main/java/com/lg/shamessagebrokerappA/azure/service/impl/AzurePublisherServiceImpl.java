@@ -1,36 +1,37 @@
-package com.lg.shamessagebrokerappA.activemq.service;
+package com.lg.shamessagebrokerappA.azure.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lg.shamessagebrokerappA.activemq.producer.ProducerMQService;
+import com.lg.shamessagebrokerappA.azure.producer.AzureProducerService;
+import com.lg.shamessagebrokerappA.azure.service.AzurePublisherService;
 import com.lg.shamessagebrokerappA.common.dto.DHIS2ObjectDto;
 import com.lg.shamessagebrokerappA.common.dto.OpenMRSObjectDto;
 import com.lg.shamessagebrokerappA.common.encryption.EncryptThePayload;
 
-@Profile("activemq")
+import lombok.extern.slf4j.Slf4j;
+
+@Profile("azure")
 @Service
-public class ActiveMQPublisherServiceImpl implements ActiveMQPublisherService {
+@Slf4j
+public class AzurePublisherServiceImpl implements AzurePublisherService {
 
-    private static final Logger log = LoggerFactory.getLogger(ActiveMQPublisherServiceImpl.class);
-    public static final String DHIS2_INSTANCE = "DHIS2";
-    public static final String OPENMRS_INSTANCE = "OPENMRS";
+    private static final String DHIS2_INSTANCE = "DHIS2";
+    private static final String OPENMRS_INSTANCE = "OPENMRS";
 
-    private ProducerMQService service;
+    private AzureProducerService service;
 
     @Autowired
-    public ActiveMQPublisherServiceImpl(ProducerMQService service) {
+    public AzurePublisherServiceImpl(AzureProducerService service) {
         this.service = service;
     }
 
     /*
-     * Publishes OpenMRS message to Active MQ queue.
+     * Publishes OpenMRS message to Azure Service Bus.
      * 
      * @param object The message from the request
      * 
@@ -44,7 +45,7 @@ public class ActiveMQPublisherServiceImpl implements ActiveMQPublisherService {
         try {
             jsonString = mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            log.error("Problem in Converting Object into JSON. {}", e.getMessage());
+            log.error("Problem in Converting Object into JSON {}", e.getMessage());
         }
         String encryptedMessage = EncryptThePayload.encrypt(jsonString);
         if (Boolean.TRUE.equals(service.sendMessage(encryptedMessage, OPENMRS_INSTANCE))) {
@@ -55,7 +56,7 @@ public class ActiveMQPublisherServiceImpl implements ActiveMQPublisherService {
     }
 
     /*
-     * Publishes DHIS2 message to Active MQ queue.
+     * Publishes DHIS2 message to Azure Service Bus.
      * 
      * @param object The message from the request
      * 
